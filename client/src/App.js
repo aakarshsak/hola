@@ -1,7 +1,12 @@
-import "./App.css";
+import React from "react";
+import ChatRoom from "./components/ChatRoom";
 
 function App() {
-  return <div className="App">Hello There</div>;
+  return (
+    <div>
+      <ChatRoom />
+    </div>
+  );
 }
 
 export default App;

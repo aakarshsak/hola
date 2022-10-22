@@ -5,11 +5,11 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 
 import com.example.hola.model.Message;
 
-@RestController
+@Controller
 public class MessageController {
 
 	@Autowired
@@ -19,13 +19,16 @@ public class MessageController {
 	@MessageMapping("/message")   //app/message
 	@SendTo("/chatroom/public")
 	public Message receiverPublicMessage(@Payload Message message) {
+		System.out.println("Reaching /message");
+		System.out.println(message);
 		return message;
 	}
 	
 	
 	@MessageMapping("/private-message")
 	public Message receiverPrivateMessage(@Payload Message message) {
-		
+		System.out.println("Reaching /private-message");
+		System.out.println(message);
 		simpMessagingTemplate.convertAndSendToUser(message.getReceiverName(), "/private", message);    //user/Sinha/private
 		return message;
 	}
